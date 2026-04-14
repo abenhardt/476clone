@@ -1,0 +1,227 @@
+/* ─── auth-animations.css ─────────────────────────────────────────────────── */
+/* Keyframes + utility classes used exclusively by the auth portal.            */
+/* Imported by AuthLayout.tsx — no side effects on other pages.               */
+
+/* ── Ken Burns: slow zoom-and-drift across background photo ─────────────── */
+@keyframes kenBurns {
+  0%   { transform: scale(1.00) translate(0%,    0%); }
+  100% { transform: scale(1.10) translate(-1.5%, -0.8%); }
+}
+
+/* ── Firefly: drifts upward with a gentle lateral sway ──────────────────── */
+@keyframes fireflyRise {
+  0%   { transform: translateY(0px)   translateX(0px);   opacity: 0; }
+  8%   {                                                  opacity: 0.95; }
+  50%  { transform: translateY(-65px) translateX(14px); }
+  92%  {                                                  opacity: 0.55; }
+  100% { transform: translateY(-130px) translateX(-7px); opacity: 0; }
+}
+
+/* ── Firefly glow pulse ──────────────────────────────────────────────────── */
+@keyframes fireflyPulse {
+  0%, 100% { box-shadow: 0 0 4px 2px rgba(255, 240, 100, 0.45); }
+  50%       { box-shadow: 0 0 10px 5px rgba(255, 248, 140, 0.90); }
+}
+
+/* ── Wood card — input + text theming for all auth pages ─────────────────── */
+/* Applied via .auth-wood-card on AuthCard's root div; covers every auth page
+   (login, register, MFA, forgot/reset password) without per-page changes.    */
+
+.auth-wood-card input[type="email"],
+.auth-wood-card input[type="password"],
+.auth-wood-card input[type="text"],
+.auth-wood-card input[type="tel"] {
+  background:   rgba(252, 243, 215, 0.96) !important;
+  border-color: rgba(135, 70, 20, 0.65)   !important;
+  border-width: 1.5px                     !important;
+  color:        #2c1005                   !important;
+  box-shadow:   inset 0 2px 6px rgba(60, 25, 5, 0.22),
+                inset 0 0 0 1px rgba(100, 50, 10, 0.08) !important;
+}
+
+.auth-wood-card input::placeholder {
+  color: #a07040 !important;
+  opacity: 0.85 !important;
+}
+
+.auth-wood-card input:focus {
+  border-color: rgba(175, 130, 30, 0.85)  !important;
+  box-shadow:   0 0 0 3px rgba(200,145,30,0.22),
+                inset 0 2px 5px rgba(60, 25, 5, 0.18) !important;
+  outline: none !important;
+  background:   rgba(255, 248, 224, 0.98) !important;
+}
+
+/* Labels */
+.auth-wood-card label {
+  color: rgba(240,205,130,0.90) !important;
+}
+
+/* "Forgot password" and similar muted links */
+.auth-wood-card a.text-slate-500 {
+  color: rgba(220,175,95,0.75) !important;
+}
+
+.auth-wood-card a.text-slate-500:hover {
+  color: #e8c870 !important;
+}
+
+/* Link text inside footer / inline */
+.auth-wood-card a.text-green-700 {
+  color: #a8d870 !important;
+}
+
+.auth-wood-card a.text-green-700:hover {
+  color: #c4f080 !important;
+}
+
+/* HIPAA / helper text */
+.auth-wood-card .text-slate-400 {
+  color: rgba(210,170,90,0.62) !important;
+}
+
+/* Error text stays red but slightly warmer */
+.auth-wood-card .text-red-500 {
+  color: #f87171 !important;
+}
+
+/* Password match text */
+.auth-wood-card p.text-sm {
+  color: rgba(225,185,105,0.85) !important;
+}
+
+/* Checkbox (register page) */
+.auth-wood-card input[type="checkbox"] {
+  accent-color: #a8c840;
+}
+
+/* Terms text */
+.auth-wood-card .text-\[#374151\] {
+  color: rgba(230,190,115,0.82) !important;
+}
+
+/* Icon colors inside inputs */
+.auth-wood-card .text-slate-400.pointer-events-none {
+  color: rgba(160,100,40,0.70) !important;
+}
+
+/* ── Film grain shift: jitters the noise tile position each frame ────────── */
+@keyframes grainShift {
+  0%  { background-position:   0%   0%; }
+  10% { background-position: -5%  -8%; }
+  20% { background-position:  8%   3%; }
+  30% { background-position: -3%   6%; }
+  40% { background-position:  6%  -4%; }
+  50% { background-position: -7%   2%; }
+  60% { background-position:  3%  -6%; }
+  70% { background-position: -4%   8%; }
+  80% { background-position:  7%  -2%; }
+  90% { background-position: -2%   5%; }
+}
+
+/* ── Lantern glow pulse ──────────────────────────────────────────────────── */
+@keyframes lanternGlow {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 1.00; }
+}
+
+/* ── Lantern sway ────────────────────────────────────────────────────────── */
+@keyframes lanternSway {
+  0%, 100% { transform: translateX(-50%) rotate(-2.5deg); }
+  50%       { transform: translateX(-50%) rotate(2.5deg); }
+}
+
+/* ── Camp counselor: entrance (slide up with spring bounce) ─────────────── */
+@keyframes counselorEnter {
+  0%   { transform: translateY(110%) scale(0.86); opacity: 0; }
+  58%  { transform: translateY(-18px) scale(1.03); opacity: 1; }
+  76%  { transform: translateY(7px) scale(0.98); }
+  100% { transform: translateY(0px) scale(1); opacity: 1; }
+}
+
+/* ── Camp counselor: idle float ─────────────────────────────────────────── */
+@keyframes counselorBob {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  35%       { transform: translateY(-10px) rotate(0.8deg); }
+  65%       { transform: translateY(-7px) rotate(-0.6deg); }
+}
+
+/* ── Camp counselor: peek away (password focused) ───────────────────────── */
+@keyframes counselorPeekLeft {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+  55%  { transform: translateY(-8px) translateX(-34px) rotate(-13deg); }
+  100% { transform: translateY(-5px) translateX(-30px) rotate(-11deg); }
+}
+
+@keyframes counselorPeekRight {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+  55%  { transform: translateY(-8px) translateX(34px) rotate(13deg); }
+  100% { transform: translateY(-5px) translateX(30px) rotate(11deg); }
+}
+
+/* ── Camp counselor: error startle hop ──────────────────────────────────── */
+@keyframes counselorErrorLeft {
+  0%   { transform: translateX(0) translateY(0) rotate(0deg); }
+  16%  { transform: translateX(-30px) translateY(-24px) rotate(-10deg); }
+  32%  { transform: translateX(-18px) translateY(2px) rotate(-5deg); }
+  50%  { transform: translateX(-24px) translateY(-14px) rotate(-8deg); }
+  68%  { transform: translateX(-10px) translateY(0px) rotate(-3deg); }
+  84%  { transform: translateX(-4px) translateY(-5px) rotate(-1deg); }
+  100% { transform: translateX(0) translateY(0) rotate(0deg); }
+}
+
+@keyframes counselorErrorRight {
+  0%   { transform: translateX(0) translateY(0) rotate(0deg); }
+  16%  { transform: translateX(30px) translateY(-24px) rotate(10deg); }
+  32%  { transform: translateX(18px) translateY(2px) rotate(5deg); }
+  50%  { transform: translateX(24px) translateY(-14px) rotate(8deg); }
+  68%  { transform: translateX(10px) translateY(0px) rotate(3deg); }
+  84%  { transform: translateX(4px) translateY(-5px) rotate(1deg); }
+  100% { transform: translateX(0) translateY(0) rotate(0deg); }
+}
+
+/* ── Camp counselor: success cheer / jump ───────────────────────────────── */
+@keyframes counselorCheerLeft {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  16%  { transform: translateY(-28px) rotate(-6deg) scale(1.08); }
+  30%  { transform: translateY(-18px) rotate(4deg) scale(1.05); }
+  46%  { transform: translateY(-24px) rotate(-4deg) scale(1.07); }
+  60%  { transform: translateY(-12px) rotate(3deg) scale(1.03); }
+  76%  { transform: translateY(-6px) rotate(-1deg) scale(1.01); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+@keyframes counselorCheerRight {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  16%  { transform: translateY(-28px) rotate(6deg) scale(1.08); }
+  30%  { transform: translateY(-18px) rotate(-4deg) scale(1.05); }
+  46%  { transform: translateY(-24px) rotate(4deg) scale(1.07); }
+  60%  { transform: translateY(-12px) rotate(-3deg) scale(1.03); }
+  76%  { transform: translateY(-6px) rotate(1deg) scale(1.01); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* ── Camp counselor: excited loop (register page) ───────────────────────── */
+@keyframes counselorExcited {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  22%       { transform: translateY(-13px) rotate(-4deg); }
+  45%       { transform: translateY(-8px) rotate(3deg); }
+  67%       { transform: translateY(-15px) rotate(-3deg); }
+  85%       { transform: translateY(-6px) rotate(2deg); }
+}
+
+/* ── Card shake: plays once on auth error ────────────────────────────────── */
+@keyframes authShake {
+  0%, 100% { transform: translateX(0); }
+  12%      { transform: translateX(-9px); }
+  25%      { transform: translateX(8px); }
+  37%      { transform: translateX(-6px); }
+  50%      { transform: translateX(5px); }
+  62%      { transform: translateX(-3px); }
+  75%      { transform: translateX(2px); }
+  87%      { transform: translateX(-1px); }
+}
+
+.auth-shake {
+  animation: authShake 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
