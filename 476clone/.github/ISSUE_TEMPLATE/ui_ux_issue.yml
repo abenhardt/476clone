@@ -1,0 +1,289 @@
+name: UI / UX Issue
+description: Report visual, layout, responsiveness, or usability problems — things that look wrong or feel confusing but aren't crashes or data errors.
+title: "[UI/UX] "
+labels: ["ui-ux", "needs-triage"]
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Before You Submit
+
+        UI and UX issues cover a wide range. This form helps you report them clearly.
+
+        Use this template for:
+        - **Visual problems** — something looks broken, misaligned, or out of place
+        - **Layout issues** — elements overlapping, cut off, or not fitting the screen
+        - **Responsiveness** — the page looks fine on desktop but is broken on mobile or tablet
+        - **Confusing flows** — you weren't sure what to click, or the next step wasn't obvious
+        - **Inconsistencies** — this screen looks or behaves differently from the rest of the app
+        - **Missing feedback** — you performed an action and nothing confirmed it worked
+        - **Accessibility** — text is hard to read, contrast is low, or keyboard navigation is broken
+
+        If the interface is completely broken (crashes, data lost, server errors), use the **Bug Report** form instead.
+
+        ---
+
+  # ── WHAT'S WRONG ────────────────────────────────────────────────────────────────
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: >
+        One sentence describing the issue. Lead with what looks or feels wrong and where it is.
+      placeholder: >
+        Example: The "Submit" button on the application form is hidden behind the footer
+        on iPhone SE, making it impossible to complete the form on small screens.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-category
+    attributes:
+      label: Issue Category
+      description: What best describes the nature of this problem?
+      options:
+        - "Visual / Cosmetic — colors, fonts, spacing, or alignment look wrong"
+        - "Layout Broken — elements overlap, are cut off, or fall outside their container"
+        - "Responsiveness — looks fine on desktop but broken on mobile or tablet"
+        - "Accessibility — hard to read, low contrast, or keyboard/screen reader issue"
+        - "Confusing Flow — unclear what to do next, or the interaction is unintuitive"
+        - "Inconsistent Design — this screen looks or behaves differently from the rest of the app"
+        - "Missing Feedback — no confirmation, error, or loading state after an action"
+        - "Broken Interaction — a button, link, modal, or form control doesn't respond correctly"
+        - "Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: Affected Page or Area
+      description: Which part of the application does this affect?
+      options:
+        - Authentication / Login / Logout
+        - Dashboard
+        - Applications
+        - Campers
+        - Sessions
+        - Documents
+        - Messaging / Inbox
+        - Medical Records
+        - Permissions / Roles / Access Control
+        - Reports
+        - Profile / Settings
+        - Notifications
+        - Admin Panel (general)
+        - Super Admin Panel
+        - Applicant / Parent / Guardian Portal
+        - Medical Staff Portal
+        - Other / Not Sure
+    validations:
+      required: true
+
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL or Route
+      description: >
+        What was the URL or page path when you noticed this?
+        Example: /admin/applications or /applicant/dashboard
+      placeholder: "Example: /admin/families/42 or /applicant/applications/new"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: user-role
+    attributes:
+      label: Your User Role
+      description: Which role were you logged in as when you noticed this?
+      options:
+        - Applicant / Parent / Guardian
+        - Admin
+        - Super Admin
+        - Medical Staff
+        - Not Logged In (public page)
+        - Unknown / Not Sure
+    validations:
+      required: true
+
+  # ── DEVICE AND ENVIRONMENT ──────────────────────────────────────────────────────
+
+  - type: dropdown
+    id: device-type
+    attributes:
+      label: Device Type
+      description: What kind of device were you using?
+      options:
+        - Desktop / Laptop
+        - Tablet
+        - Mobile Phone
+    validations:
+      required: true
+
+  - type: dropdown
+    id: viewport
+    attributes:
+      label: Approximate Screen Size / Viewport
+      description: How large was the window or screen where you saw this?
+      options:
+        - Large desktop (1440px and above)
+        - Standard desktop (1280px – 1440px)
+        - Small desktop / large laptop (1024px – 1280px)
+        - Small laptop or large tablet (768px – 1024px)
+        - Tablet portrait (600px – 768px)
+        - Mobile (below 600px)
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Samsung Internet
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Local / Localhost (development machine)
+        - Staging / Preview
+        - Production
+        - Not Sure
+    validations:
+      required: true
+
+  # ── DESCRIBE THE ISSUE ──────────────────────────────────────────────────────────
+
+  - type: textarea
+    id: what-looks-wrong
+    attributes:
+      label: What Looks or Feels Wrong?
+      description: >
+        Describe what you see that is incorrect, confusing, or broken.
+        Be specific — "it looks weird" is not enough. Describe what you see versus what you expect.
+      placeholder: >
+        Example: The "Sessions" dropdown in the filter bar on the Admin Applications page
+        overflows past the right edge of the screen on a 1280px monitor. The last few
+        options are cut off and unselectable. This only started happening after the new
+        filter panel was added.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-design
+    attributes:
+      label: What Did You Expect?
+      description: >
+        What should this look or behave like? Describe the outcome you expected —
+        either based on the design intent, how another part of the app works,
+        or just basic usability expectations.
+      placeholder: >
+        Example: The dropdown should fit within the filter panel without overflowing.
+        All session options should be visible and selectable.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: blocks-task
+    attributes:
+      label: Does This Block the User From Completing a Task?
+      description: >
+        Can a user still complete their goal despite this issue, or does it stop them entirely?
+      options:
+        - "Yes — the user cannot complete the task at all because of this issue"
+        - "Partially — the user can work around it but it is difficult or confusing"
+        - "No — the user can still complete the task; this is a polish or clarity issue"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity / Impact
+      description: >
+        How much does this impact the experience?
+
+        Critical — Completely blocks task completion or causes significant confusion for most users.
+        High — Significantly impairs the experience; users will notice and struggle.
+        Medium — Noticeable issue; most users will notice but can still get their work done.
+        Low — Polish issue; affects a small number of users or only in edge cases.
+      options:
+        - "Critical — Blocks task completion entirely"
+        - "High — Significantly impairs experience for most users"
+        - "Medium — Noticeable but users can still complete their task"
+        - "Low — Polish issue, cosmetic, or affects a narrow edge case"
+    validations:
+      required: true
+
+  # ── SUPPORTING EVIDENCE ─────────────────────────────────────────────────────────
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or Screen Recording
+      description: >
+        For UI issues, a screenshot is usually the most valuable thing you can provide.
+        Drag and drop images or a recording directly into this field.
+
+        If you can, annotate the screenshot to highlight the specific problem area.
+        Before attaching: blur or crop out any real names, email addresses,
+        medical information, or other sensitive data.
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce (if not obvious from the screenshot)
+      description: >
+        If the issue requires specific steps to trigger it — like clicking a particular button,
+        resizing the window, or having a certain type of record — list those steps here.
+        Skip this if the screenshot makes it completely self-evident.
+      placeholder: |
+        1. Log in as Admin
+        2. Navigate to Applications → click the session filter dropdown
+        3. Resize browser to 1280px wide
+        4. Observe that dropdown options overflow past the right edge
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: >
+        Anything else that would help? For example: "This only happens on the detail page,
+        not the list page." "The issue appeared after the sidebar was added." "It looks
+        correct in Chrome but broken in Safari."
+    validations:
+      required: false
+
+  # ── FINAL CHECK ─────────────────────────────────────────────────────────────────
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-Submission Checklist
+      description: Please confirm before submitting.
+      options:
+        - label: I have included a screenshot or described the issue clearly enough to reproduce it
+          required: true
+        - label: I have searched existing issues and confirmed this is not a duplicate
+          required: true
+        - label: >
+            I have not included any patient names, SSNs, medical data, or other
+            sensitive personal information in this report
+          required: true

@@ -1,0 +1,577 @@
+/* Camp Burnt Gin Design Tokens — Light Mode (permanent) */
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  color-scheme: light;
+
+  /* Typography */
+  --font-headline: 'Crimson Pro', Georgia, serif;
+  --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-size: 16px;
+
+  /* Typography Scale - Figma Exact Values */
+  --text-xs: 0.9375rem;   /* 15px */
+  --text-sm: 1.0625rem;   /* 17px */
+  --text-base: 1.25rem;   /* 20px - LARGER BASE */
+  --text-lg: 1.625rem;    /* 26px */
+  --text-xl: 2.25rem;     /* 36px */
+  --text-2xl: 4rem;       /* 64px - HERO */
+
+  /* Spacing Scale */
+  --spacing-xs: 0.5rem;   /* 8px */
+  --spacing-sm: 1rem;     /* 16px */
+  --spacing-md: 1.5rem;   /* 24px */
+  --spacing-lg: 2rem;     /* 32px */
+  --spacing-xl: 3rem;     /* 48px */
+
+  /* Border Radius */
+  --radius: 0.625rem;     /* 10px */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* ============================================================
+     BASE THEME: Light mode — permanent
+     ============================================================ */
+
+  /* Base Colors */
+  --background: #ffffff;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+  --primary: #111827;
+  --primary-foreground: #ffffff;
+  --secondary: rgba(22, 163, 74, 0.10);
+  --secondary-foreground: #111827;
+  --muted: #f3f4f6;
+  --muted-foreground: #374151;
+  --accent: rgba(22, 163, 74, 0.12);
+  --accent-foreground: #111827;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: #f9fafb;
+  --input-background: #f9fafb;
+  --ring: rgba(22, 163, 74, 0.35);
+
+  /* Navigation Colors */
+  --nav-text: rgba(17, 24, 39, 0.95);
+  --nav-text-active: #111827;
+
+  /* Brand Accent Colors — emerald green */
+  --ember-orange: #16a34a;        /* Emerald — primary brand accent */
+  --warm-amber: #059669;          /* Medium emerald — secondary accent */
+  --forest-green: #059669;
+  --night-sky-blue: #2563eb;
+
+  /* Font Weights */
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+
+  /* Overlays */
+  --overlay-light: rgba(255, 255, 255, 0.97);
+  --overlay-medium: rgba(255, 255, 255, 0.92);
+  --overlay-subtle: rgba(255, 255, 255, 0.80);
+  --overlay-primary: rgba(22, 163, 74, 0.10);
+  --overlay-secondary: rgba(248, 249, 250, 0.95);
+  --overlay-nav: rgba(255, 255, 255, 0.97);
+  --overlay-nav-subtle: rgba(255, 255, 255, 0.85);
+
+  /* Glass Surfaces */
+  --glass-overlay: rgba(0, 0, 0, 0.03);
+  --glass-strong: rgba(255, 255, 255, 0.95);
+  --glass-medium: rgba(255, 255, 255, 0.85);
+  --glass-light: rgba(255, 255, 255, 0.60);
+  --glass-dark-strong: #111827;
+  --glass-dark-medium: rgba(17, 24, 39, 0.85);
+  --glass-icon-bg: rgba(22, 163, 74, 0.12);
+  --glass-mission-bg: rgba(0, 0, 0, 0.02);
+  --glass-footer-dark: rgba(17, 24, 39, 0.97);
+  --glass-footer-light: rgba(255, 255, 255, 0.95);
+
+  /* Borders */
+  --border-ember: rgba(22, 163, 74, 0.25);
+  --border-glass: rgba(0, 0, 0, 0.10);
+  --button-border-dark: rgba(22, 163, 74, 0.25);
+  --button-border-light: rgba(0, 0, 0, 0.10);
+
+  /* Text Overlays */
+  --text-overlay-dark: rgba(17, 24, 39, 0.90);
+  --text-overlay-light: rgba(255, 255, 255, 0.95);
+
+  /* Navigation Accent */
+  --nav-shadow-ember: rgba(22, 163, 74, 0.12);
+
+  /* Elevation System */
+  --shadow-hero-panel: 0 20px 80px rgba(0, 0, 0, 0.12);
+
+  /* Card shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.10), 0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.80), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-card-prominent: 0 4px 20px rgba(0, 0, 0, 0.10), 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-card-subtle: 0 1px 4px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --shadow-card-glass: 0 4px 24px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.90), 0 0 0 1px rgba(0, 0, 0, 0.06);
+
+  /* Button shadows */
+  --shadow-ember-primary: 0 4px 16px rgba(22, 163, 74, 0.30), 0 0 24px rgba(22, 163, 74, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  --shadow-ember-secondary: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.60), 0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  /* Accent glows */
+  --shadow-amber-glow: 0 4px 16px rgba(22, 163, 74, 0.20), 0 0 12px rgba(22, 163, 74, 0.12);
+  --shadow-light-button-primary: 0 4px 16px rgba(22, 163, 74, 0.30), 0 0 24px rgba(22, 163, 74, 0.15);
+  --shadow-light-button-secondary: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.60);
+  --shadow-light-icon: 0 4px 12px rgba(22, 163, 74, 0.20), 0 0 0 1px rgba(22, 163, 74, 0.12);
+
+  /* On-Image Content Tokens */
+  --on-image-text:         rgba(17, 24, 39, 0.97);
+  --on-image-muted:        rgba(17, 24, 39, 0.65);
+  --on-image-surface:      rgba(255, 255, 255, 0.85);
+  --on-image-border:       rgba(0, 0, 0, 0.10);
+  --on-image-pill-bg:      rgba(0, 0, 0, 0.06);
+  --on-image-pill-text:    rgba(17, 24, 39, 0.85);
+  --on-image-pill-border:  rgba(0, 0, 0, 0.12);
+  --on-image-shadow:       0 4px 24px rgba(0, 0, 0, 0.12);
+
+  /* Readability scrim */
+  --scrim-bg:              rgba(255, 255, 255, 0.15);
+
+  /* Accent label */
+  --accent-label:          #16a34a;
+
+  /* CTA button tokens */
+  --cta-primary-bg:        #16a34a;
+  --cta-primary-color:     #ffffff;
+  --cta-primary-border:    #15803d;
+  --cta-primary-shadow:    0 4px 16px rgba(22, 163, 74, 0.35), 0 0 24px rgba(22, 163, 74, 0.15);
+
+  --cta-secondary-bg:      rgba(255, 255, 255, 0.95);
+  --cta-secondary-color:   #111827;
+  --cta-secondary-border:  rgba(0, 0, 0, 0.12);
+  --cta-secondary-shadow:  0 2px 8px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.80);
+
+  /* Dashboard surfaces — glass nav chrome, transparent main area */
+  --dash-bg: transparent;
+  --dash-sidebar-bg: rgba(255, 255, 255, 0.92);
+  --dash-header-bg: rgba(255, 255, 255, 0.92);
+  --dash-sidebar-border: rgba(0, 0, 0, 0.07);
+  --dash-nav-active-bg: rgba(22, 163, 74, 0.08);
+  --dash-nav-hover-bg: rgba(0, 0, 0, 0.04);
+
+  /* Main content area surface — provides a readable frosted ground for all
+     page titles and content that sit outside explicit glass cards.
+     3% transparent so the background adds a subtle warm tint without bleeding through. */
+  --dash-main-bg: rgba(250, 251, 252, 0.97);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FONT SCALING — applied via data-font-scale attribute
+   ══════════════════════════════════════════════════════════════ */
+
+[data-font-scale='small'] { --font-size: 14px; }
+[data-font-scale='default'] { --font-size: 16px; }
+[data-font-scale='large'] { --font-size: 18px; }
+[data-font-scale='xlarge'] { --font-size: 20px; }
+
+/* ══════════════════════════════════════════════════════════════
+   HIGH CONTRAST MODE — applied via data-high-contrast attribute
+   Targets WCAG AAA contrast ratios for all text and interactive elements.
+   ══════════════════════════════════════════════════════════════ */
+
+[data-high-contrast='true'] {
+  /* Text: remove all muting — every text element renders at full contrast */
+  --muted-foreground: #111827;
+  --nav-text: #111827;
+  --nav-text-active: #111827;
+  --on-image-muted: rgba(17, 24, 39, 0.97);
+
+  /* Borders: make structural lines clearly visible */
+  --border: rgba(0, 0, 0, 0.55);
+  --dash-sidebar-border: rgba(0, 0, 0, 0.40);
+  --border-glass: rgba(0, 0, 0, 0.40);
+  --on-image-border: rgba(0, 0, 0, 0.45);
+
+  /* Focus ring: wider and darker */
+  --ring: rgba(22, 163, 74, 0.70);
+
+  /* Interactive states: more visible hover/active indicators */
+  --dash-nav-active-bg: rgba(22, 163, 74, 0.16);
+  --dash-nav-hover-bg: rgba(0, 0, 0, 0.10);
+
+  /* Inputs: stronger border on form controls */
+  --input: #f0f0f0;
+  --input-background: #f0f0f0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ACCENT SHIMMER — utility class for animated underline effects
+   ══════════════════════════════════════════════════════════════ */
+
+@keyframes accent-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.accent-shimmer {
+  background-size: 200% 100%;
+}
+
+/* Base Styles */
+@layer base {
+  html {
+    font-size: var(--font-size);
+    scroll-behavior: smooth;
+    /* Fallback background — dark so the 1-frame gap during route transitions
+       doesn't flash white. Both AuthLayout and DashboardShell use position:fixed
+       background images; this is only visible if neither has painted yet. */
+    background-color: #111;
+    /* Lock the document from ever scrolling. All scrolling is delegated to
+       the <main> scroll container inside DashboardShell. Without this, macOS
+       elastic overscroll propagates from <main> to the document, physically
+       shifting the h-screen layout div away from the viewport and exposing the
+       fixed BackgroundSlideshow underneath. */
+    overflow: hidden;
+    height: 100%;
+  }
+
+  body {
+    background: #111;
+    overflow: hidden;
+    height: 100%;
+    color: var(--foreground);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headline);
+    letter-spacing: -0.022em;
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  button {
+    font-family: var(--font-headline);
+    font-size: var(--text-base);
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
+  }
+
+  input, textarea {
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(22, 163, 74, 0.20);
+}
+
+/* ─── Page Transition ───────────────────────────────────────────────────── */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ADAPTIVE GLASS SYSTEM — Elite Premium Tier
+   ──────────────────────────────────────────────────────────────
+   RULES:
+   1. Text MUST sit inside a glass or solid container — never on raw background.
+   2. Glass is a CONTAINER ONLY — cards, banners, panels, nav chrome.
+   3. NEVER apply glass to <body>, root layout wrappers, or page overlays.
+   4. System adapts based on [data-bg-tone] on the shell root.
+
+   Hierarchy:
+     .glass        → light breathable glass (metric cards, quick-links)
+     .glass-card   → adaptive glass (primary content cards — preferred)
+     .glass-panel  → semi-opaque glass (tables, lists, section containers)
+     .glass-strong → richer glass (hero banners, prominent panels)
+     .glass-data   → solid fallback (dense tables, audit logs, logs)
+     .glass-nav    → navigation chrome (sidebar, header)
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Adaptive CSS custom properties (default: neutral background) ── */
+:root {
+  --glass-card-bg:      rgba(255, 255, 255, 0.10);
+  --glass-card-border:  rgba(0, 0, 0, 0.09);   /* subtle dark border — visible on light dashboard bg */
+  --glass-card-blur:    12px;
+
+  /* glass-panel raised from 0.82 → 0.88 for WCAG AA compliance at neutral tone */
+  --glass-panel-bg:     rgba(255, 255, 255, 0.88);
+  --glass-panel-blur:   10px;
+  --glass-panel-border: rgba(0, 0, 0, 0.09);
+
+  --glass-hero-bg:      rgba(255, 255, 255, 0.14);
+  --glass-hero-border:  rgba(255, 255, 255, 0.22);
+  --glass-hero-blur:    14px;
+
+  /* ── CASS — Contrast-Aware Surface System ─────────────────────────────
+     Three canonical surface tiers that map directly to the decision engine.
+     Use these via .surface-primary / .surface-glass / .surface-solid CSS
+     classes, or via GlassCard variant="primary" | "hero" | "solid".
+
+     Tier rules:
+       surface-primary  → text-heavy content (panels, tables, dashboards, lists)
+       surface-glass    → decorative only (stat cards, visual accents, hero PROTECTED)
+       surface-solid    → critical clarity (medical data, audit logs, compliance forms)
+  ── */
+  --surface-primary-bg:     rgba(255, 255, 255, 0.88);
+  --surface-primary-blur:   8px;
+  --surface-primary-border: rgba(0, 0, 0, 0.09);
+
+  --surface-glass-bg:       rgba(255, 255, 255, 0.14);
+  --surface-glass-blur:     12px;
+  --surface-glass-border:   rgba(255, 255, 255, 0.22);
+
+  --surface-solid-border:   rgba(0, 0, 0, 0.09);
+}
+
+/* Dark background tone — increase opacity for readability */
+[data-bg-tone='dark'] {
+  --glass-card-bg:      rgba(255, 255, 255, 0.13);
+  --glass-card-border:  rgba(255, 255, 255, 0.22);
+  --glass-card-blur:    14px;
+
+  --glass-panel-bg:     rgba(255, 255, 255, 0.92);
+  --glass-panel-blur:   12px;
+  --glass-panel-border: rgba(0, 0, 0, 0.06);
+
+  --glass-hero-bg:      rgba(255, 255, 255, 0.18);
+  --glass-hero-border:  rgba(255, 255, 255, 0.28);
+  --glass-hero-blur:    16px;
+
+  --surface-primary-bg:     rgba(255, 255, 255, 0.92);
+  --surface-glass-bg:       rgba(255, 255, 255, 0.18);
+  --surface-glass-border:   rgba(255, 255, 255, 0.28);
+}
+
+/* Light background tone — reduce opacity, let background breathe */
+[data-bg-tone='light'] {
+  --glass-card-bg:      rgba(255, 255, 255, 0.08);
+  --glass-card-border:  rgba(255, 255, 255, 0.15);
+  --glass-card-blur:    10px;
+
+  /* Raised from 0.78 → 0.84 — WCAG AA floor enforced even on light backgrounds */
+  --glass-panel-bg:     rgba(255, 255, 255, 0.84);
+  --glass-panel-blur:   8px;
+  --glass-panel-border: rgba(0, 0, 0, 0.06);
+
+  --glass-hero-bg:      rgba(255, 255, 255, 0.11);
+  --glass-hero-border:  rgba(255, 255, 255, 0.18);
+  --glass-hero-blur:    12px;
+
+  --surface-primary-bg:     rgba(255, 255, 255, 0.85);
+  --surface-glass-bg:       rgba(255, 255, 255, 0.11);
+  --surface-glass-border:   rgba(255, 255, 255, 0.18);
+}
+
+/* ── Light glass — metric cards, quick-link cards, small panels ── */
+.glass {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(12px) saturate(180%) brightness(108%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(108%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* ── Adaptive glass card — primary content cards (recommended) ── */
+.glass-card {
+  background: var(--glass-card-bg);
+  backdrop-filter: blur(var(--glass-card-blur)) saturate(180%) brightness(108%);
+  -webkit-backdrop-filter: blur(var(--glass-card-blur)) saturate(180%) brightness(108%);
+  border: 1px solid var(--glass-card-border);
+  /* layered shadow: tight contact shadow for edge definition + diffuse elevation */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.09),
+              0 4px 16px rgba(0, 0, 0, 0.07),
+              inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  /* translate + box-shadow at 0.2s for snappy hover; bg/border at 0.9s for adaptive tone transitions */
+  transition: background 0.9s ease, border-color 0.9s ease, translate 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-card:hover {
+  translate: 0 -2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09),
+              0 8px 24px rgba(0, 0, 0, 0.09),
+              inset 0 1px 0 rgba(255, 255, 255, 0.40);
+}
+
+/* ── Adaptive glass panel — section containers, tables, lists ── */
+.glass-panel {
+  background: var(--glass-panel-bg);
+  backdrop-filter: blur(var(--glass-panel-blur)) saturate(160%) brightness(102%);
+  -webkit-backdrop-filter: blur(var(--glass-panel-blur)) saturate(160%) brightness(102%);
+  border: 1px solid var(--glass-panel-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08),
+              0 4px 16px rgba(0, 0, 0, 0.06),
+              inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  transition: background 0.9s ease, border-color 0.9s ease, box-shadow 0.2s ease;
+}
+.glass-panel:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08),
+              0 8px 24px rgba(0, 0, 0, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.60);
+}
+
+/* ── Stronger glass — hero banners, welcome cards ── */
+.glass-strong {
+  background: var(--glass-hero-bg);
+  backdrop-filter: blur(var(--glass-hero-blur)) saturate(200%) brightness(110%);
+  -webkit-backdrop-filter: blur(var(--glass-hero-blur)) saturate(200%) brightness(110%);
+  border: 1px solid var(--glass-hero-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10),
+              inset 0 1px 0 rgba(255, 255, 255, 0.30);
+  transition: background 0.9s ease, border-color 0.9s ease;
+}
+
+/* ── Solid fallback — dense data tables, logs, complex data grids ── */
+.glass-data {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px) saturate(140%) brightness(102%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%) brightness(102%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06),
+              inset 0 1px 0 rgba(255, 255, 255, 0.80);
+}
+
+/* ── Navigation glass — sidebar, header (higher opacity for chrome) ── */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px) saturate(180%) brightness(105%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(105%);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CASS — Contrast-Aware Surface System
+   ──────────────────────────────────────────────────────────────
+   Three enforceable surface tiers. Apply exactly one per container.
+
+   Decision rules (highest priority first):
+     1. critical data (medical, audit, compliance)     → .surface-solid
+     2. dense text / data-heavy / interactive content  → .surface-primary
+     3. over background image with any non-trivial text → .surface-primary
+     4. minimal text + decorative / stat card           → .surface-glass
+
+   Protected components (never change surface):
+     • Green CTA / action buttons     → keep as-is
+     • Status badges                  → keep as-is
+     • Hero section                   → keep glass-strong / surface-glass
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── TIER 1: PRIMARY — default for all text-heavy content ── */
+/* Tables · Dashboards · Inbox · Documents · Analytics · Lists */
+.surface-primary {
+  background: var(--surface-primary-bg);
+  backdrop-filter: blur(var(--surface-primary-blur)) saturate(150%) brightness(102%);
+  -webkit-backdrop-filter: blur(var(--surface-primary-blur)) saturate(150%) brightness(102%);
+  border: 1px solid var(--surface-primary-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08),
+              0 4px 16px rgba(0, 0, 0, 0.06),
+              inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transition: background 0.9s ease, border-color 0.9s ease, box-shadow 0.2s ease;
+}
+.surface-primary:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08),
+              0 8px 24px rgba(0, 0, 0, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.70);
+}
+
+/* ── TIER 2: GLASS — decorative only (minimal text) ── */
+/* Stat cards · Visual accents · Hero panels (PROTECTED) */
+/* HARD RULE: if text density > minimal → use surface-primary instead */
+.surface-glass {
+  background: var(--surface-glass-bg);
+  backdrop-filter: blur(var(--surface-glass-blur)) saturate(180%) brightness(108%);
+  -webkit-backdrop-filter: blur(var(--surface-glass-blur)) saturate(180%) brightness(108%);
+  border: 1px solid var(--surface-glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transition: background 0.9s ease, border-color 0.9s ease, translate 0.2s ease, box-shadow 0.2s ease;
+}
+.surface-glass:hover {
+  translate: 0 -2px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06),
+              inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+/* ── TIER 3: SOLID — critical clarity, no background bleed ── */
+/* Medical data · Audit logs · Compliance forms */
+.surface-solid {
+  background: #ffffff;
+  border: 1px solid var(--surface-solid-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06),
+              inset 0 1px 0 rgba(255, 255, 255, 0.80);
+  transition: box-shadow 0.2s ease;
+}
+.surface-solid:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.80);
+}
+
+/* ─── Reduced Motion ────────────────────────────────────────────────────── */
+/* Two sources of truth:                                                       */
+/*   1. OS preference via @media (prefers-reduced-motion: reduce)              */
+/*   2. App-level opt-in via data-reduced-motion="true" on <html> (Settings)  */
+/* Framer Motion: handled by MotionConfig reducedMotion="user" in providers   */
+/* CSS transitions: scoped to [data-cbg-app] only — avoids nuking third-party */
+@media (prefers-reduced-motion: reduce) {
+  [data-cbg-app] *,
+  [data-cbg-app] *::before,
+  [data-cbg-app] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* App-level reduced motion — applied when user enables it in Settings even if
+   the OS preference is not set. Uses the same property values as the media
+   query above so they are consistent. */
+[data-reduced-motion='true'] * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}

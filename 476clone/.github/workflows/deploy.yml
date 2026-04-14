@@ -1,0 +1,341 @@
+name: Deploy
+
+# Deployment triggers only when the CI workflow completes successfully.
+# Branch routing:
+#   develop → staging environment
+#   main    → production environment
+#
+# This creates a hard dependency: no deployment ever runs unless all policy,
+# backend, and frontend validation jobs pass first.
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+
+  # ─── Staging: Frontend (Vercel) ───────────────────────────────────────────
+  # Deploys the develop branch to the Vercel staging environment.
+  # Secrets are scoped to the staging GitHub environment.
+  deploy-staging-frontend:
+    name: Deploy Frontend (staging)
+    runs-on: ubuntu-latest
+    environment: staging
+    timeout-minutes: 15
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'develop'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+
+      - name: Staging build
+        working-directory: frontend
+        run: pnpm build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_API_VERSION: v1
+          VITE_ENVIRONMENT: staging
+          VITE_ENABLE_DEVTOOLS: "false"
+          NODE_ENV: production
+
+      - name: Check Vercel configuration (staging)
+        id: check_vercel_staging
+        run: |
+          if [[ -z "$VERCEL_TOKEN_VALUE" ]]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          VERCEL_TOKEN_VALUE: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Skip notice (Vercel secrets not configured)
+        if: steps.check_vercel_staging.outputs.configured == 'false'
+        run: echo "Staging frontend deployment skipped -- VERCEL_TOKEN not configured."
+
+      - name: Deploy to Vercel (staging)
+        if: steps.check_vercel_staging.outputs.configured == 'true'
+        working-directory: frontend
+        run: npx vercel --yes
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+  # ─── Staging: Backend (SSH + Docker) ─────────────────────────────────────
+  # Deploys the develop branch to the staging server via SSH + Docker.
+  # Skips cleanly if DEPLOY_SSH_HOST is not configured in the staging
+  # GitHub environment secrets.
+  deploy-staging-backend:
+    name: Deploy Backend (staging)
+    runs-on: ubuntu-latest
+    environment: staging
+    timeout-minutes: 20
+    needs: deploy-staging-frontend
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'develop'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check deployment configuration
+        id: check
+        run: |
+          if [[ -z "$DEPLOY_HOST" ]]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+
+      - name: Skip notice (deployment secrets not configured)
+        if: steps.check.outputs.configured == 'false'
+        run: |
+          echo "Staging backend deployment skipped -- infrastructure secrets not configured."
+          echo "Required secrets (in staging environment): DEPLOY_SSH_HOST, DEPLOY_SSH_USER, DEPLOY_SSH_KEY, DEPLOY_APP_DIR"
+
+      - name: Deploy via SSH
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          install -m 0600 /dev/null /tmp/deploy_key
+          printf '%s' "$SSH_KEY_CONTENTS" > /tmp/deploy_key
+
+          ssh -i /tmp/deploy_key \
+            -o StrictHostKeyChecking=accept-new \
+            -o BatchMode=yes \
+            "${SSH_USER_VALUE}@${SSH_HOST_VALUE}" \
+            "cd '${APP_DIR_VALUE}' && \
+             git pull --ff-only origin develop && \
+             docker compose pull && \
+             docker compose up -d --build && \
+             docker compose exec -T app php artisan migrate --force && \
+             docker compose exec -T app php artisan optimize"
+
+          rm -f /tmp/deploy_key
+        env:
+          SSH_HOST_VALUE: ${{ secrets.DEPLOY_SSH_HOST }}
+          SSH_USER_VALUE: ${{ secrets.DEPLOY_SSH_USER }}
+          SSH_KEY_CONTENTS: ${{ secrets.DEPLOY_SSH_KEY }}
+          APP_DIR_VALUE: ${{ secrets.DEPLOY_APP_DIR }}
+
+      - name: Post-deploy health check
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          MAX_ATTEMPTS=15
+          DELAY=4
+          attempt=1
+          while [ $attempt -le $MAX_ATTEMPTS ]; do
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${API_URL_VALUE}/api/health" || echo "000")
+            if [[ "$HTTP_STATUS" == "200" ]]; then
+              echo "Health check passed after $attempt attempt(s) (HTTP $HTTP_STATUS)."
+              break
+            fi
+            echo "Attempt $attempt/$MAX_ATTEMPTS: HTTP $HTTP_STATUS -- retrying in ${DELAY}s..."
+            if [ $attempt -eq $MAX_ATTEMPTS ]; then
+              echo "FAIL: Health check did not pass after $MAX_ATTEMPTS attempts."
+              exit 1
+            fi
+            sleep $DELAY
+            attempt=$((attempt + 1))
+          done
+        env:
+          API_URL_VALUE: ${{ secrets.DEPLOY_API_URL }}
+
+  # ─── Production: Frontend (Vercel) ────────────────────────────────────────
+  # Builds and deploys the React frontend to Vercel production.
+  #
+  # Required repository secrets (in production GitHub environment):
+  #   VERCEL_TOKEN       Personal access token from vercel.com/account/tokens
+  #   VERCEL_ORG_ID      Found in Vercel project settings (Team ID or personal)
+  #   VERCEL_PROJECT_ID  Found in Vercel project settings
+  #   VITE_API_BASE_URL  Production API base URL
+  #
+  # One-time setup: run `npx vercel link` locally in frontend/ to obtain
+  # VERCEL_ORG_ID and VERCEL_PROJECT_ID, then store them as secrets.
+  deploy-frontend:
+    name: Deploy Frontend (production)
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 15
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+
+      - name: Production build
+        working-directory: frontend
+        run: pnpm build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_API_VERSION: v1
+          VITE_ENVIRONMENT: production
+          VITE_ENABLE_DEVTOOLS: "false"
+          NODE_ENV: production
+
+      - name: Check Vercel configuration (production)
+        id: check_vercel_prod
+        run: |
+          if [[ -z "$VERCEL_TOKEN_VALUE" ]]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          VERCEL_TOKEN_VALUE: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Skip notice (Vercel secrets not configured)
+        if: steps.check_vercel_prod.outputs.configured == 'false'
+        run: echo "Production frontend deployment skipped -- VERCEL_TOKEN not configured."
+
+      - name: Deploy to Vercel (production)
+        if: steps.check_vercel_prod.outputs.configured == 'true'
+        working-directory: frontend
+        run: npx vercel --prod --yes
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+  # ─── Production: Backend (SSH + Docker) ───────────────────────────────────
+  # Connects to the production server via SSH and performs a Docker-based
+  # rolling deployment using the multi-stage Dockerfile in
+  # backend/camp-burnt-gin-api/docker/.
+  #
+  # Required repository secrets (in production GitHub environment):
+  #   DEPLOY_SSH_HOST     Hostname or IP of the production server
+  #   DEPLOY_SSH_USER     SSH user with Docker access on the server
+  #   DEPLOY_SSH_KEY      Private key (full PEM, no passphrase)
+  #   DEPLOY_APP_DIR      Absolute path to the app on the server
+  #   DEPLOY_API_URL      (optional) Production API base URL for health check
+  #
+  # Until these secrets are set, this job skips cleanly without failing.
+  deploy-backend:
+    name: Deploy Backend (production)
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 20
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+    needs: deploy-frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check deployment configuration
+        id: check
+        run: |
+          if [[ -z "$DEPLOY_HOST" ]]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+
+      - name: Skip notice (deployment secrets not configured)
+        if: steps.check.outputs.configured == 'false'
+        run: |
+          echo "Backend deployment skipped -- infrastructure secrets not configured."
+          echo "Required secrets: DEPLOY_SSH_HOST, DEPLOY_SSH_USER, DEPLOY_SSH_KEY, DEPLOY_APP_DIR"
+
+      - name: Deploy via SSH
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          install -m 0600 /dev/null /tmp/deploy_key
+          printf '%s' "$SSH_KEY_CONTENTS" > /tmp/deploy_key
+
+          ssh -i /tmp/deploy_key \
+            -o StrictHostKeyChecking=accept-new \
+            -o BatchMode=yes \
+            "${SSH_USER_VALUE}@${SSH_HOST_VALUE}" \
+            "cd '${APP_DIR_VALUE}' && \
+             git pull --ff-only origin main && \
+             docker compose pull && \
+             docker compose up -d --build && \
+             docker compose exec -T app php artisan migrate --force && \
+             docker compose exec -T app php artisan optimize"
+
+          rm -f /tmp/deploy_key
+        env:
+          SSH_HOST_VALUE: ${{ secrets.DEPLOY_SSH_HOST }}
+          SSH_USER_VALUE: ${{ secrets.DEPLOY_SSH_USER }}
+          SSH_KEY_CONTENTS: ${{ secrets.DEPLOY_SSH_KEY }}
+          APP_DIR_VALUE: ${{ secrets.DEPLOY_APP_DIR }}
+
+      - name: Post-deploy health check
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          if [[ -z "$API_URL_VALUE" ]]; then
+            echo "DEPLOY_API_URL not configured -- skipping health check."
+            exit 0
+          fi
+
+          MAX_ATTEMPTS=15
+          DELAY=4
+          attempt=1
+          while [ $attempt -le $MAX_ATTEMPTS ]; do
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${API_URL_VALUE}/api/health" || echo "000")
+            if [[ "$HTTP_STATUS" == "200" ]]; then
+              echo "Health check passed after $attempt attempt(s) (HTTP $HTTP_STATUS)."
+              break
+            fi
+            echo "Attempt $attempt/$MAX_ATTEMPTS: HTTP $HTTP_STATUS -- retrying in ${DELAY}s..."
+            if [ $attempt -eq $MAX_ATTEMPTS ]; then
+              echo "FAIL: Health check did not pass after $MAX_ATTEMPTS attempts."
+              exit 1
+            fi
+            sleep $DELAY
+            attempt=$((attempt + 1))
+          done
+        env:
+          API_URL_VALUE: ${{ secrets.DEPLOY_API_URL }}

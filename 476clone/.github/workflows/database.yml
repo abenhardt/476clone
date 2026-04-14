@@ -1,0 +1,173 @@
+name: Database
+
+on:
+  push:
+    branches: [ main, frontend, backend, develop ]
+    paths:
+      - 'backend/camp-burnt-gin-api/database/migrations/**'
+      - 'backend/camp-burnt-gin-api/database/seeders/**'
+  pull_request:
+    branches: [ main, frontend, backend, develop ]
+    paths:
+      - 'backend/camp-burnt-gin-api/database/migrations/**'
+      - 'backend/camp-burnt-gin-api/database/seeders/**'
+
+permissions:
+  contents: read
+
+jobs:
+
+  # ─── Migration Validation ─────────────────────────────────────────────────
+  # Runs migrate:fresh, tests rollback + re-migration, runs the full seeder
+  # suite, and outputs a schema summary -- all against real MySQL 8.0.
+  # The schema summary is included here rather than a separate job to avoid
+  # spinning up a second MySQL service container for read-only output.
+  migration-validation:
+    name: Migration Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: camp_burnt_gin_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, mysql, bcmath
+          coverage: none
+          tools: composer:v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: backend/camp-burnt-gin-api/vendor
+          key: composer-php8.2-${{ hashFiles('backend/camp-burnt-gin-api/composer.lock') }}
+          restore-keys: |
+            composer-php8.2-
+
+      - name: Install Composer dependencies
+        working-directory: backend/camp-burnt-gin-api
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Prepare environment
+        working-directory: backend/camp-burnt-gin-api
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Run fresh migrations
+        working-directory: backend/camp-burnt-gin-api
+        run: php artisan migrate:fresh --force
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: camp_burnt_gin_test
+          DB_USERNAME: root
+          DB_PASSWORD: password
+
+      - name: Test rollback and re-migration
+        working-directory: backend/camp-burnt-gin-api
+        run: |
+          BATCH_COUNT=$(php artisan migrate:status | grep -c "Ran" || true)
+          if [ "$BATCH_COUNT" -gt 0 ]; then
+            echo "Testing rollback of last migration batch..."
+            php artisan migrate:rollback --step=1 --force
+            echo "Re-running migrations to verify idempotency..."
+            php artisan migrate --force
+          else
+            echo "No migrations found to test rollback."
+          fi
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: camp_burnt_gin_test
+          DB_USERNAME: root
+          DB_PASSWORD: password
+
+      - name: Run seeders
+        working-directory: backend/camp-burnt-gin-api
+        run: php artisan db:seed --force
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: camp_burnt_gin_test
+          DB_USERNAME: root
+          DB_PASSWORD: password
+
+      - name: Output schema summary
+        working-directory: backend/camp-burnt-gin-api
+        run: |
+          echo "=== Migration Status ==="
+          php artisan migrate:status
+          echo ""
+          echo "=== Tables ==="
+          mysql -h127.0.0.1 -uroot camp_burnt_gin_test -e "SHOW TABLES;"
+        env:
+          MYSQL_PWD: password
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: camp_burnt_gin_test
+          DB_USERNAME: root
+          DB_PASSWORD: password
+
+  # ─── Migration Conflict Detection ────────────────────────────────────────
+  # Detects duplicate migration timestamps and non-standard file naming.
+  # No database service required -- inspects filenames only.
+  migration-conflict-check:
+    name: Migration Conflict Detection
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for duplicate migration timestamps
+        working-directory: backend/camp-burnt-gin-api
+        run: |
+          echo "Checking for duplicate migration timestamps..."
+          TIMESTAMPS=$(ls database/migrations/*.php 2>/dev/null \
+            | sed -E 's/.*\/([0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6})_.*/\1/' \
+            | sort)
+          DUPLICATES=$(echo "$TIMESTAMPS" | uniq -d)
+          if [ -n "$DUPLICATES" ]; then
+            echo "ERROR: Duplicate migration timestamps detected:"
+            echo "$DUPLICATES"
+            exit 1
+          fi
+          echo "PASS: No duplicate migration timestamps."
+
+      - name: Validate migration naming conventions
+        working-directory: backend/camp-burnt-gin-api
+        run: |
+          echo "Validating migration file naming..."
+          INVALID=$(ls database/migrations/*.php 2>/dev/null \
+            | grep -v -E '.*/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_[a-z_]+\.php$' || true)
+          if [ -n "$INVALID" ]; then
+            echo "WARNING: Non-standard migration names detected:"
+            echo "$INVALID"
+          else
+            echo "PASS: All migration names conform to conventions."
+          fi

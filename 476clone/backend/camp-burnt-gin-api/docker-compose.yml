@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: camp-burnt-gin-mysql
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-password}
+      MYSQL_DATABASE: ${DB_DATABASE:-camp_burnt_gin}
+      MYSQL_USER: ${DB_USERNAME:-camp_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+    networks:
+      - camp-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-password}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PHP Application (Laravel)
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: development
+    container_name: camp-burnt-gin-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    environment:
+      - APP_ENV=${APP_ENV:-local}
+      - APP_DEBUG=${APP_DEBUG:-true}
+      - APP_URL=http://localhost:${APP_PORT:-8000}
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE:-camp_burnt_gin}
+      - DB_USERNAME=${DB_USERNAME:-camp_user}
+      - DB_PASSWORD=${DB_PASSWORD:-password}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MAIL_HOST=mailhog
+      - MAIL_PORT=1025
+    volumes:
+      - .:/var/www/html
+      - php_vendor:/var/www/html/vendor
+      - php_storage:/var/www/html/storage
+    networks:
+      - camp-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: sh /var/www/html/docker/entrypoint.sh
+
+  # Redis (Optional - for cache/sessions)
+  redis:
+    image: redis:7-alpine
+    container_name: camp-burnt-gin-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - camp-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # Mailhog (Email Testing)
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: camp-burnt-gin-mailhog
+    restart: unless-stopped
+    ports:
+      - "${MAILHOG_SMTP_PORT:-1025}:1025"  # SMTP
+      - "${MAILHOG_WEB_PORT:-8025}:8025"   # Web UI
+    networks:
+      - camp-network
+
+networks:
+  camp-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+  php_vendor:
+    driver: local
+  php_storage:
+    driver: local

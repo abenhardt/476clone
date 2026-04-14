@@ -1,0 +1,166 @@
+name: Security
+
+on:
+  push:
+    branches: [ main, frontend, backend, develop ]
+  pull_request:
+    branches: [ main, frontend, backend, develop ]
+  schedule:
+    # Daily security audit at 02:00 UTC
+    - cron: '0 2 * * *'
+  # Allow manual triggering to run an on-demand security scan without a push.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+
+  # ─── Composer Dependency Audit ────────────────────────────────────────────
+  # composer audit reads composer.lock directly and queries the Packagist
+  # security advisories database. No vendor install is required.
+  composer-audit:
+    name: Composer Dependency Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer:v2
+
+      - name: Run Composer security audit
+        working-directory: backend/camp-burnt-gin-api
+        run: composer audit --format=plain
+
+  # ─── Node Dependency Audit ────────────────────────────────────────────────
+  # pnpm audit reads pnpm-lock.yaml directly and queries the npm advisory
+  # registry. No node_modules install is required.
+  node-audit:
+    name: Node Dependency Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run pnpm audit (high severity and above)
+        working-directory: frontend
+        run: pnpm audit --audit-level=high
+
+  # ─── Sensitive File Check ─────────────────────────────────────────────────
+  env-file-check:
+    name: Environment File Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for committed environment files
+        run: bash scripts/check-env-files.sh
+
+  # ─── Secret Pattern Scan ──────────────────────────────────────────────────
+  # Hard fails on any finding. Patterns are conservative to minimize noise.
+  secret-scan:
+    name: Secret Pattern Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Scan for hardcoded credential patterns
+        run: |
+          FOUND=0
+
+          check_pattern() {
+            local label="$1"
+            local pattern="$2"
+            if grep -rniE \
+              --include="*.php" \
+              --include="*.ts" \
+              --include="*.tsx" \
+              --include="*.js" \
+              --include="*.json" \
+              --exclude-dir=.git \
+              --exclude-dir=vendor \
+              --exclude-dir=node_modules \
+              --exclude="*.example" \
+              "$pattern" . 2>/dev/null; then
+              echo "FAIL [$label]: Potential credential pattern detected above."
+              FOUND=1
+            fi
+          }
+
+          check_pattern "api-key"      'api[_-]?key\s*[=:]\s*["\047][^"\047]{16,}'
+          check_pattern "secret"       '\bsecret\s*[=:]\s*["\047][^"\047]{8,}'
+          check_pattern "bearer"       'bearer\s+[a-zA-Z0-9\-_\.]{20,}'
+          check_pattern "private-key"  '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----'
+          check_pattern "db-url"       '(mysql|postgres)://[^:]+:[^@]{6,}@'
+          check_pattern "aws-key"      'AKIA[0-9A-Z]{16}'
+
+          if [[ "$FOUND" -eq 1 ]]; then
+            echo ""
+            echo "Move hardcoded credentials to environment variables."
+            echo "See docs/backend/SECURITY.md for approved secret management practices."
+            exit 1
+          fi
+
+          echo "PASS: No credential patterns detected."
+
+  # ─── Dangerous Function Scan ──────────────────────────────────────────────
+  code-security:
+    name: Dangerous Function Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Scan PHP source for dangerous functions
+        run: |
+          FOUND=0
+          DANGEROUS=(eval exec system passthru shell_exec create_function)
+
+          for func in "${DANGEROUS[@]}"; do
+            if grep -rniE \
+              --include="*.php" \
+              --exclude-dir=vendor \
+              "\b${func}\s*\(" \
+              backend/camp-burnt-gin-api/app \
+              backend/camp-burnt-gin-api/routes 2>/dev/null | \
+              grep -vE ':[0-9]+:[[:space:]]*(//|#|[*])'; then
+              echo "WARNING: '${func}' found in application source."
+              FOUND=1
+            fi
+          done
+
+          if [[ "$FOUND" -eq 1 ]]; then
+            echo ""
+            echo "Each occurrence requires explicit security review sign-off."
+            exit 1
+          fi
+
+          echo "PASS: No dangerous functions detected."

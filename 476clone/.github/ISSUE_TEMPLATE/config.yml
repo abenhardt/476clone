@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security Vulnerability (Private Disclosure)
+    url: https://github.com/WinthropUniversity/project-2025-2026-pizza-tacos/security/advisories/new
+    about: >
+      DO NOT use a public issue to report a security vulnerability or PHI exposure.
+      Use GitHub's private security advisory system to report it confidentially.
+      Public security reports will be closed without action.

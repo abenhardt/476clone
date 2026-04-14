@@ -1,0 +1,8 @@
+/**
+ * Landing Page Typography
+ * Fraunces + Inter - Google Fonts Import
+ * TODO: Replace with self-hosted WOFF2 files for production
+ */
+
+/* Import from Google Fonts - Only required weights */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Inter:wght@400;500&display=swap');

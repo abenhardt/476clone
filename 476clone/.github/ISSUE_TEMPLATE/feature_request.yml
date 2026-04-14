@@ -1,0 +1,220 @@
+name: Feature Request
+description: >
+  Propose a new feature or an improvement to an existing one. The more clearly
+  you explain the problem and the value, the easier it is for the team to evaluate
+  and prioritize your request.
+title: "[Feature] "
+labels: ["enhancement", "needs-triage"]
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Before You Submit
+
+        The best feature requests are rooted in a real problem, not just a preference.
+        Before filling this out, ask yourself:
+
+        - **What specific problem am I trying to solve?** (Not "I want X" — "I can't do Y because...")
+        - **Who else would benefit from this?** The more people affected, the higher the priority.
+        - **Is this the right solution, or just one possible solution?** Describing the problem clearly
+          lets engineers find a better solution than the one you might have in mind.
+
+        This form is for new features and enhancements. For broken behavior, use the **Bug Report** form instead.
+
+        ---
+
+  # ── THE PROBLEM ─────────────────────────────────────────────────────────────────
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What Problem Does This Solve?
+      description: >
+        Describe the specific problem, friction point, or gap in the current application.
+        Be concrete — describe the actual situation where this problem occurs.
+        Do not start with the solution. Start with the pain.
+      placeholder: >
+        Example: When an Admin reviews an application, there is no way to leave an
+        internal note visible only to other staff. Currently, staff use a shared
+        spreadsheet outside the system to communicate about specific applicants,
+        which is error-prone and not connected to the application record.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: Affected Area
+      description: Which part of the application does this request relate to?
+      options:
+        - Authentication / Login / Logout
+        - Dashboard
+        - Applications
+        - Campers
+        - Sessions
+        - Documents
+        - Messaging / Inbox
+        - Medical Records
+        - Permissions / Roles / Access Control
+        - Reports
+        - Profile / Settings
+        - Notifications
+        - Admin Panel (general)
+        - Super Admin Panel
+        - Applicant / Parent / Guardian Portal
+        - Medical Staff Portal
+        - Other / Not Sure
+    validations:
+      required: true
+
+  # ── THE REQUEST ─────────────────────────────────────────────────────────────────
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: >
+        Describe the change or new capability you're requesting. Be specific about what
+        it should look like and how it should work. Use examples and step-by-step flows
+        if that helps explain your vision.
+      placeholder: >
+        Example: Add an "Internal Notes" section to the application detail page,
+        visible only to Admin and Super Admin roles. Each note should show the
+        author's name and timestamp. Notes should not be visible to Applicants.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: who-benefits
+    attributes:
+      label: Who Benefits From This?
+      description: Which user roles would be directly improved by this feature?
+      multiple: true
+      options:
+        - Applicant / Parent / Guardian
+        - Admin
+        - Super Admin
+        - Medical Staff
+        - All Users
+        - Internal Team / Staff Only
+    validations:
+      required: true
+
+  # ── THE VALUE ───────────────────────────────────────────────────────────────────
+
+  - type: textarea
+    id: why-it-matters
+    attributes:
+      label: Why Does This Matter?
+      description: >
+        What is the real-world impact of adding this? Think in terms of time saved,
+        errors avoided, workflows unblocked, or user experience improved.
+        The clearer you make the value, the easier it is to justify and prioritize.
+      placeholder: >
+        Example: Right now, staff spend time cross-referencing external spreadsheets
+        during application review meetings. Internal notes would keep all context inside
+        the system, reduce miscommunication, and give the review team a shared record
+        without PHI exposure risk.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency / Priority
+      description: >
+        How urgent is this from your perspective?
+
+        Critical — Without this, a core workflow is blocked or unusable right now.
+        High — This significantly improves a frequently-used workflow; should be addressed soon.
+        Medium — Valuable improvement, but current workarounds are acceptable for now.
+        Low — Nice to have; low urgency; future consideration is fine.
+      options:
+        - "Critical — Core workflow is blocked without this"
+        - "High — Frequently-used workflow, should be addressed soon"
+        - "Medium — Valuable but current workarounds are acceptable"
+        - "Low — Nice to have, no urgency"
+    validations:
+      required: true
+
+  # ── CONTEXT ─────────────────────────────────────────────────────────────────────
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: >
+        Have you thought about other ways to solve this problem? What did you consider,
+        and why did you decide against those alternatives? (Leave blank if not applicable.)
+      placeholder: >
+        Example: We considered using the existing Messaging system for internal notes,
+        but Messaging is visible to Applicants, which makes it unsuitable for staff-only communication.
+    validations:
+      required: false
+
+  - type: textarea
+    id: workflow-impact
+    attributes:
+      label: Impact on Existing Workflows
+      description: >
+        Could this change affect any existing workflows, data, or other users in unexpected ways?
+        Think about edge cases: Does it change how current records appear?
+        Could it break something an existing user relies on?
+      placeholder: >
+        Example: This adds a new section to the application detail page. It should not
+        affect the existing review flow, but the page layout may need to be adjusted
+        to accommodate the notes panel without feeling cramped.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: phi-compliance
+    attributes:
+      label: PHI / Compliance Considerations
+      description: >
+        Does this feature involve Protected Health Information or sensitive access?
+        Check all that apply. Leave unchecked if not relevant.
+      options:
+        - label: This feature involves Protected Health Information (PHI)
+        - label: This feature changes who can access sensitive records
+        - label: This feature should generate an audit log entry
+        - label: This feature requires a new permission or role change
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Screenshots, Mockups, or References
+      description: >
+        Drag and drop screenshots, wireframes, or mockups directly into this field.
+        You can also link to similar features in other tools for reference.
+        Visual examples make it much easier for engineers and designers to understand your intent.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: >
+        Anything else the team should know? Constraints, deadlines, related requests,
+        or background that didn't fit anywhere else above.
+    validations:
+      required: false
+
+  # ── FINAL CHECK ─────────────────────────────────────────────────────────────────
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-Submission Checklist
+      description: Please confirm before submitting.
+      options:
+        - label: I have searched existing feature requests and confirmed this is not a duplicate
+          required: true
+        - label: I have described the problem clearly, not just the solution I want
+          required: true
+        - label: >
+            I have not included any patient names, SSNs, medical data, or other
+            sensitive personal information in this request
+          required: true

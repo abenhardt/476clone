@@ -1,0 +1,177 @@
+name: Rollback
+
+# Manual rollback workflow. Reverts a specific component to a prior deployment
+# or a target Git SHA. Requires infrastructure secrets to be configured in the
+# target environment.
+#
+# Usage:
+#   Actions → Rollback → Run workflow
+#   - environment:  production | staging
+#   - component:    both | frontend | backend
+#   - target_sha:   (optional) specific Git SHA; leave blank to use previous
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - production
+          - staging
+      component:
+        description: 'Component to roll back'
+        required: true
+        type: choice
+        options:
+          - both
+          - frontend
+          - backend
+      target_sha:
+        description: 'Git SHA to roll back to (leave blank for previous deployment)'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+
+  # ─── Frontend Rollback ─────────────────────────────────────────────────────
+  # Uses `vercel rollback` to revert the Vercel deployment.
+  # When target_sha is provided the SHA is passed to vercel rollback; otherwise
+  # Vercel reverts to the most recent previous deployment automatically.
+  rollback-frontend:
+    name: Rollback Frontend (${{ inputs.environment }})
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 15
+    if: inputs.component == 'frontend' || inputs.component == 'both'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Roll back Vercel deployment
+        run: |
+          if [[ -n "$TARGET_SHA" ]]; then
+            echo "Rolling back frontend to SHA: $TARGET_SHA"
+            npx vercel rollback "$TARGET_SHA" --yes
+          else
+            echo "Rolling back frontend to previous deployment..."
+            npx vercel rollback --yes
+          fi
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          TARGET_SHA: ${{ inputs.target_sha }}
+
+  # ─── Backend Rollback ──────────────────────────────────────────────────────
+  # Connects to the target environment server via SSH, checks out the target
+  # SHA (or HEAD~1 if none supplied), rebuilds Docker containers, and re-runs
+  # migrations. A health check confirms the rollback is live.
+  #
+  # The `always()` guard allows this job to run even when rollback-frontend is
+  # skipped (i.e. component == 'backend') while still failing fast if the
+  # frontend rollback actually errored.
+  rollback-backend:
+    name: Rollback Backend (${{ inputs.environment }})
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 20
+    needs: [rollback-frontend]
+    if: >-
+      always() &&
+      (inputs.component == 'backend' || inputs.component == 'both') &&
+      (needs.rollback-frontend.result == 'success' || needs.rollback-frontend.result == 'skipped')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check deployment configuration
+        id: check
+        run: |
+          if [[ -z "$DEPLOY_HOST" ]]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+
+      - name: Skip notice (deployment secrets not configured)
+        if: steps.check.outputs.configured == 'false'
+        run: |
+          echo "Backend rollback skipped -- infrastructure secrets not configured."
+          echo "Required secrets: DEPLOY_SSH_HOST, DEPLOY_SSH_USER, DEPLOY_SSH_KEY, DEPLOY_APP_DIR"
+
+      - name: Roll back via SSH
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          install -m 0600 /dev/null /tmp/deploy_key
+          printf '%s' "$SSH_KEY_CONTENTS" > /tmp/deploy_key
+
+          if [[ -n "$TARGET_SHA" ]]; then
+            CHECKOUT_CMD="git fetch origin && git checkout $TARGET_SHA"
+          else
+            CHECKOUT_CMD="git fetch origin && git checkout HEAD~1"
+          fi
+
+          ssh -i /tmp/deploy_key \
+            -o StrictHostKeyChecking=accept-new \
+            -o BatchMode=yes \
+            "${SSH_USER_VALUE}@${SSH_HOST_VALUE}" \
+            "cd '${APP_DIR_VALUE}' && \
+             ${CHECKOUT_CMD} && \
+             docker compose pull && \
+             docker compose up -d --build && \
+             docker compose exec -T app php artisan migrate --force && \
+             docker compose exec -T app php artisan optimize"
+
+          rm -f /tmp/deploy_key
+        env:
+          SSH_HOST_VALUE: ${{ secrets.DEPLOY_SSH_HOST }}
+          SSH_USER_VALUE: ${{ secrets.DEPLOY_SSH_USER }}
+          SSH_KEY_CONTENTS: ${{ secrets.DEPLOY_SSH_KEY }}
+          APP_DIR_VALUE: ${{ secrets.DEPLOY_APP_DIR }}
+          TARGET_SHA: ${{ inputs.target_sha }}
+
+      - name: Post-rollback health check
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          if [[ -z "$API_URL_VALUE" ]]; then
+            echo "DEPLOY_API_URL not configured -- skipping health check."
+            exit 0
+          fi
+
+          MAX_ATTEMPTS=15
+          DELAY=4
+          attempt=1
+          while [ $attempt -le $MAX_ATTEMPTS ]; do
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${API_URL_VALUE}/api/health" || echo "000")
+            if [[ "$HTTP_STATUS" == "200" ]]; then
+              echo "Health check passed after $attempt attempt(s) (HTTP $HTTP_STATUS)."
+              break
+            fi
+            echo "Attempt $attempt/$MAX_ATTEMPTS: HTTP $HTTP_STATUS -- retrying in ${DELAY}s..."
+            if [ $attempt -eq $MAX_ATTEMPTS ]; then
+              echo "FAIL: Health check did not pass after $MAX_ATTEMPTS attempts."
+              exit 1
+            fi
+            sleep $DELAY
+            attempt=$((attempt + 1))
+          done
+        env:
+          API_URL_VALUE: ${{ secrets.DEPLOY_API_URL }}

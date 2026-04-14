@@ -1,0 +1,304 @@
+name: Bug Report
+description: >
+  Something broke or behaved unexpectedly. Use this form to report it clearly
+  so engineers can find, reproduce, and fix it fast.
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Before You Submit
+
+        A well-written bug report gets fixed faster. Please read these before filling out the form.
+
+        - **Be specific.** "It didn't work" tells us nothing. Describe exactly what broke.
+        - **List every step.** Think of it like giving directions — every click and action counts.
+        - **Copy error messages exactly.** Don't paraphrase. Exact text helps engineers search the codebase.
+        - **If it only happened once, say so.** That's still useful — not a reason to skip reporting.
+        - **Never include real names, SSNs, medical data, or any personal information in this report.**
+
+        ---
+
+  # ── WHAT BROKE ─────────────────────────────────────────────────────────────────
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: >
+        One clear sentence describing what broke and where. Lead with the specific failure —
+        not how it made you feel, not "something is wrong."
+      placeholder: >
+        Example: Clicking "Submit Application" as an Applicant returns a blank screen
+        instead of a confirmation message when a document is attached.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: Affected Area
+      description: Which part of the application did this happen in? Pick the closest match.
+      options:
+        - Authentication / Login / Logout
+        - Dashboard
+        - Applications
+        - Campers
+        - Sessions
+        - Documents
+        - Messaging / Inbox
+        - Medical Records
+        - Permissions / Roles / Access Control
+        - Reports
+        - Profile / Settings
+        - Notifications
+        - Admin Panel (general)
+        - Super Admin Panel
+        - Applicant / Parent / Guardian Portal
+        - Medical Staff Portal
+        - Other / Not Sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user-role
+    attributes:
+      label: Your User Role
+      description: >
+        Which role were you logged in as when this happened?
+        Role-based access means a bug may only appear for certain roles — this is critical.
+      options:
+        - Applicant / Parent / Guardian
+        - Admin
+        - Super Admin
+        - Medical Staff
+        - Not Logged In (public page)
+        - Unknown / Not Sure
+    validations:
+      required: true
+
+  # ── WHERE IT HAPPENED ───────────────────────────────────────────────────────────
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which version of the application were you using when this occurred?
+      options:
+        - Local / Localhost (development machine)
+        - Staging / Preview
+        - Production
+        - Not Sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: Which browser were you using?
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Samsung Internet
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser Version (optional)
+      description: >
+        Find this under Help → About in your browser. Helps reproduce rendering bugs.
+      placeholder: "Example: Chrome 123.0.6312.86"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS
+        - Windows 11
+        - Windows 10
+        - iOS (iPhone / iPad)
+        - Android
+        - Linux
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device-type
+    attributes:
+      label: Device Type
+      options:
+        - Desktop / Laptop
+        - Tablet
+        - Mobile Phone
+    validations:
+      required: true
+
+  # ── HOW TO REPRODUCE ────────────────────────────────────────────────────────────
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: >
+        List every step from the moment you opened the page to the moment the bug occurred.
+        Include button labels, page names, and any data you entered.
+        Assume the engineer has never used this part of the application before.
+      placeholder: |
+        1. Log in as an Applicant (parent account)
+        2. Navigate to Dashboard → click "My Applications"
+        3. Click "Start New Application"
+        4. Fill in all required fields on Step 1
+        5. On Step 2, attach a PDF under "Supporting Documents"
+        6. Click the "Submit Application" button
+        7. Page goes blank — no confirmation, no error message shown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should have happened? Be specific about what you expected to see.
+      placeholder: >
+        The application should submit successfully and I should be redirected
+        to a confirmation page showing "Your application has been submitted."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: >
+        What actually happened? Describe exactly what you saw.
+        If there was an error message on screen, copy it word-for-word — do not paraphrase.
+      placeholder: >
+        The page went completely blank. No error message appeared. The URL did not change.
+        Refreshing the page showed the application as unsaved.
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Error Message / Console Output
+      description: >
+        Did you see an error message on the page? Copy it here exactly.
+
+        If you can open browser developer tools (press F12 → click the "Console" tab),
+        paste any red error lines here. This single field can save hours of debugging.
+
+        Leave blank if no errors were visible.
+      placeholder: |
+        Paste any error text exactly as it appeared. Examples:
+          "Uncaught TypeError: Cannot read properties of undefined (reading 'map')"
+          "500 Internal Server Error — POST /api/applications/submit"
+          "419 Page Expired"
+      render: shell
+    validations:
+      required: false
+
+  # ── HOW BAD IS IT ───────────────────────────────────────────────────────────────
+
+  - type: dropdown
+    id: reproducibility
+    attributes:
+      label: Reproducibility
+      description: >
+        How consistently does this bug occur when you follow the steps above?
+        "Only happened once" is a valid and useful answer — please be honest.
+      options:
+        - "Always — happens every time I follow the steps"
+        - "Often — happens most of the time, but not every time"
+        - "Sometimes — occurs occasionally, hard to predict when"
+        - "Once — only happened one time, could not reproduce it"
+        - "Not sure — I haven't tried to reproduce it yet"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: >
+        How badly does this bug impact users? Use these definitions:
+
+        Critical — App crashes, data is lost or corrupted, a security or PHI exposure is possible,
+        or users are completely blocked from completing a core task with no workaround.
+
+        High — A key feature is broken or produces wrong results and there is no reasonable workaround.
+        Multiple users are affected or a primary workflow is impaired.
+
+        Medium — A feature is impaired but a workaround exists. The issue is noticeable
+        but does not completely block users from completing their goal another way.
+
+        Low — Minor inconvenience, cosmetic problem, or edge case. Users are not blocked.
+        Can be addressed in a future release without urgency.
+      options:
+        - "Critical — Crash, data loss, PHI/security risk, or users completely blocked"
+        - "High — Key feature broken, no workaround, multiple users affected"
+        - "Medium — Feature impaired but workaround exists"
+        - "Low — Minor, cosmetic, or edge case; users are not blocked"
+    validations:
+      required: true
+
+  # ── SUPPORTING EVIDENCE ─────────────────────────────────────────────────────────
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or Screen Recording
+      description: >
+        Drag and drop images or a screen recording directly into this field.
+        A screenshot is often the fastest way to communicate what went wrong.
+
+        Before attaching: blur or crop out any real names, email addresses,
+        medical information, or other sensitive data.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: >
+        Anything else that might help? For example:
+        "This only happens when the camper has two applications in the same session."
+        "I noticed this started after the new session was created yesterday."
+        "Another tester confirmed they saw this too on a different machine."
+      placeholder: Any additional details that might be relevant...
+    validations:
+      required: false
+
+  # ── FINAL CHECK ─────────────────────────────────────────────────────────────────
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-Submission Checklist
+      description: Please confirm before submitting.
+      options:
+        - label: I have searched existing issues and confirmed this is not a duplicate
+          required: true
+        - label: I have included specific, step-by-step reproduction steps
+          required: true
+        - label: >
+            I have not included any patient names, SSNs, medical data, or other
+            sensitive personal information in this report
+          required: true
+        - label: >
+            If this could be a security or PHI exposure issue, I have marked
+            severity as Critical and will follow up with the team privately
+          required: false

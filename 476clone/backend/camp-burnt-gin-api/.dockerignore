@@ -1,0 +1,44 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Dependencies
+/vendor
+/node_modules
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build artifacts
+/storage/*.key
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+
+# Testing
+/coverage
+/.phpunit.result.cache
+
+# CI/CD
+/.github
+
+# Documentation
+/docs
+
+# Temporary files
+*.log
+*.tmp
+*.cache
+.DS_Store
+Thumbs.db

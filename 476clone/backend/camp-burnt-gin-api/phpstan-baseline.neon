@@ -1,0 +1,1783 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Console/Commands/ArchiveExpiredRecords.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\Camper\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Console/Commands/ArchiveExpiredRecords.php
+
+		-
+			message: '#^Cannot call method eq\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Console/Commands/CalculateRecordRetention.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Console/Commands/CalculateRecordRetention.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$registration_closes_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/SendIncompleteApplicationReminders.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:notify\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Console/Commands/SendIncompleteApplicationReminders.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/MessageSent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/MessageSent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Auth/AuthController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/Auth/AuthController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camp/SessionDashboardController.php
+
+		-
+			message: '#^Called ''count'' on Laravel collection, but could have been retrieved as a query\.$#'
+			identifier: larastan.noUnnecessaryCollectionCall
+			count: 1
+			path: app/Http/Controllers/Api/Camp/SessionDashboardController.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/Camp/SessionDashboardController.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: app/Http/Controllers/Api/Camp/SessionDashboardController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\Application\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Api/Camp/SessionDashboardController.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Controllers/Api/Camp/SessionDashboardController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>first_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/Camp/SessionDashboardController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>last_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/Camp/SessionDashboardController.php
+
+		-
+			message: '#^Offset ''capacity'' does not exist on array\{success\: false, invalid_transition\?\: bool, capacity_exceeded\: bool, compliance_details\?\: array\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/ApplicationController.php
+
+		-
+			message: '#^Offset ''enrolled'' does not exist on array\{success\: false, invalid_transition\?\: bool, capacity_exceeded\: bool, compliance_details\?\: array\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/ApplicationController.php
+
+		-
+			message: '#^Offset ''session_name'' does not exist on array\{success\: false, invalid_transition\?\: bool, capacity_exceeded\: bool, compliance_details\?\: array\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/ApplicationController.php
+
+		-
+			message: '#^Parameter \#1 \$recipient of method App\\Services\\SystemNotificationService\:\:applicationSubmitted\(\) expects App\\Models\\User, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Http/Controllers/Api/Camper/ApplicationController.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Carbon\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/Camper/ApplicationDraftController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date_of_birth\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/UserProfileController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$emergencyContacts\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/UserProfileController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/UserProfileController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$gender\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/UserProfileController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/UserProfileController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/UserProfileController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$medicalRecord\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Camper/UserProfileController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Api/Camper/UserProfileController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Document/ApplicantDocumentController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Controllers/Api/Document/ApplicantDocumentController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Document/DocumentController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Document/DocumentController.php
+
+		-
+			message: '#^Dead catch \- Exception is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: app/Http/Controllers/Api/Document/DocumentController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$camp_session_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Document/DocumentRequestController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Document/DocumentRequestController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Document/DocumentRequestController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Api/Document/DocumentRequestController.php
+
+		-
+			message: '#^Parameter \$recipient of method App\\Services\\SystemNotificationService\:\:notify\(\) expects App\\Models\\User, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/Document/DocumentRequestController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: app/Http/Controllers/Api/Document/DocumentRequestController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$applications\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$applications_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$date_of_birth\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$gender\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tshirt_size\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 2
+			path: app/Http/Controllers/Api/Family/FamilyController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$fields\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$icon_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$short_title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\FormDefinition\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormDefinitionController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormFieldController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormFieldController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormFieldController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormFieldController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormFieldController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormFieldController.php
+
+		-
+			message: '#^Parameter \#1 \$field of method App\\Http\\Controllers\\Api\\Form\\FormFieldController\:\:fieldPayload\(\) expects App\\Models\\FormField, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormFieldController.php
+
+		-
+			message: '#^Parameter \#1 \$option of method App\\Http\\Controllers\\Api\\Form\\FormFieldOptionController\:\:optionPayload\(\) expects App\\Models\\FormFieldOption, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormFieldOptionController.php
+
+		-
+			message: '#^Parameter \#1 \$section of method App\\Http\\Controllers\\Api\\Form\\FormSectionController\:\:sectionPayload\(\) expects App\\Models\\FormSection, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormSectionController.php
+
+		-
+			message: '#^Parameter \#1 \$array \(array\{array\{id\: ''cyshcn_form''\|''english_application''\|''medical_form''\|''spanish_application'', label\: string, description\: string, download_filename\: string, document_type\: string, requires_medical_signature\: bool, available\: bool, url\: string\}, array\{id\: ''cyshcn_form''\|''english_application''\|''medical_form''\|''spanish_application'', label\: string, description\: string, download_filename\: string, document_type\: string, requires_medical_signature\: bool, available\: bool, url\: string\}, array\{id\: ''cyshcn_form''\|''english_application''\|''medical_form''\|''spanish_application'', label\: string, description\: string, download_filename\: string, document_type\: string, requires_medical_signature\: bool, available\: bool, url\: string\}, array\{id\: ''cyshcn_form''\|''english_application''\|''medical_form''\|''spanish_application'', label\: string, description\: string, download_filename\: string, document_type\: string, requires_medical_signature\: bool, available\: bool, url\: string\}\}\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: app/Http/Controllers/Api/Form/FormsDownloadController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$activeFields\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/PublicFormController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/PublicFormController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$icon_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/PublicFormController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/PublicFormController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$short_title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/PublicFormController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/PublicFormController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Form/PublicFormController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Api/Form/PublicFormController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Inbox/InboxUserController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\User\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Api/Inbox/InboxUserController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/Inbox/InboxUserController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$avatar_path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/Inbox/MessageController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Inbox/MessageController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Inbox/MessageController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/Inbox/MessageController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\Inbox\\MessageController\:\:downloadAttachment\(\) should return Illuminate\\Http\\JsonResponse\|Symfony\\Component\\HttpFoundation\\BinaryFileResponse but returns Symfony\\Component\\HttpFoundation\\StreamedResponse\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/Inbox/MessageController.php
+
+		-
+			message: '#^Parameter \#2 \$allergies of static method App\\Models\\TreatmentLog\:\:detectAllergyConflicts\(\) expects Illuminate\\Support\\Collection\<int, App\\Models\\Allergy\>, Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/Medical/TreatmentLogController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Http/Controllers/Api/Risk/RiskAssessmentController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Http/Controllers/Api/Risk/RiskAssessmentController.php
+
+		-
+			message: '#^Offset ''critical''\|''high''\|''standard'' on array\{critical\: 0, high\: 1, standard\: 2\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 2
+			path: app/Http/Controllers/Api/Risk/RiskAssessmentController.php
+
+		-
+			message: '#^Property App\\Models\\Camper\:\:\$supervision_level \(string\) does not accept App\\Enums\\SupervisionLevel\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/Api/Risk/RiskAssessmentController.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Carbon\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Controllers/Api/Risk/RiskAssessmentController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/System/AuditLogController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/System/AuditLogController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/System/AuditLogController.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Carbon\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/System/AuditLogController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/System/AuditLogController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Application\:\:\$count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/System/ReportController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Application\:\:\$month\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/System/ReportController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CampSession\:\:\$enrolled\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/System/ReportController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\Application\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Api/System/ReportController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/System/UserController.php
+
+		-
+			message: '#^Cannot call method toISOString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/System/UserController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Controllers/Api/System/UserController.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ConversationResource\:\:\$activeParticipantRecords\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ConversationResource\:\:\$lastMessage\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ConversationResource\:\:\$participants\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\ConversationResource\:\:relationLoaded\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Conversation\:\:buildLastMessage\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Conversation\:\:buildParticipants\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Cannot call method toISOString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^PHPDoc tag @var with type App\\Models\\Conversation is not subtype of native type \$this\(App\\Http\\Resources\\ConversationResource\)\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Parameter \#2 \$callback of method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Conversation\>\:\:when\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>is_important" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>is_starred" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: app/Http/Resources/ConversationResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MessageAttachmentResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MessageAttachmentResource.php
+
+		-
+			message: '#^Cannot call method requiresNotes\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/ActivityPermission.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\ActivityPermissionLevel\:\:No will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/ActivityPermission.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\ActivityPermissionLevel\:\:Restricted will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/ActivityPermission.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\ActivityPermissionLevel\:\:Yes will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/ActivityPermission.php
+
+		-
+			message: '#^Cannot call method requiresImmediateAttention\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Allergy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/AuditLog.php
+
+		-
+			message: '#^Unsafe access to private constant App\\Models\\AuditLog\:\:PHI_FIELDS through static\:\:\.$#'
+			identifier: staticClassAccess.privateConstant
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: '#^Unsafe call to private method App\\Models\\AuditLog\:\:redactPhiValues\(\) through static\:\:\.$#'
+			identifier: staticClassAccess.privateMethod
+			count: 2
+			path: app/Models/AuditLog.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Models/AuditLog.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:requiresImmediateAttention\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Models/Camper.php
+
+		-
+			message: '#^Cannot call method diffInYears\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Camper.php
+
+		-
+			message: '#^Cannot call method copy\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Deadline.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Deadline.php
+
+		-
+			message: '#^Cannot call method getRiskScore\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Diagnosis.php
+
+		-
+			message: '#^Cannot call method isApproved\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Document.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Document.php
+
+		-
+			message: '#^Cannot call method isPending\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Document.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Models/Document.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/MedicalFollowUp.php
+
+		-
+			message: '#^Cannot call method isToday\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/MedicalFollowUp.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: app/Models/MedicalFollowUp.php
+
+		-
+			message: '#^Result of && is always true\.$#'
+			identifier: booleanAnd.alwaysTrue
+			count: 1
+			path: app/Models/MedicalFollowUp.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Enums\\FollowUpStatus\:\:Cancelled will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Models/MedicalFollowUp.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Enums\\FollowUpStatus\:\:Completed will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Models/MedicalFollowUp.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\FollowUpStatus\:\:Pending will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/MedicalFollowUp.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\IncidentSeverity\:\:Critical will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/MedicalIncident.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/MedicalRecord.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/MedicalRestriction.php
+
+		-
+			message: '#^Result of \|\| is always false\.$#'
+			identifier: booleanOr.alwaysFalse
+			count: 1
+			path: app/Models/MedicalVisit.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\VisitDisposition\:\:EmergencyTransfer will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/MedicalVisit.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\VisitDisposition\:\:SentHome will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/MedicalVisit.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$recipient_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Message.php
+
+		-
+			message: '#^Method App\\Models\\Message\:\:getRecipientsForUser\(\) should return Illuminate\\Support\\Collection&iterable\<App\\Models\\MessageRecipient\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 2
+			path: app/Models/Message.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Models/TreatmentLog.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Cannot call method isFuture\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:getLockoutMinutesRemaining\(\) should return int\|null but returns float\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$camp\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/AcceptanceLetterNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$end_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/AcceptanceLetterNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/AcceptanceLetterNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$start_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/AcceptanceLetterNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$end_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/ApplicationStatusChangedNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Notifications/Camper/ApplicationStatusChangedNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$start_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/ApplicationStatusChangedNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Notifications/Camper/ApplicationSubmittedNotification.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Notifications/Camper/ApplicationSubmittedNotification.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Notifications/Camper/ApplicationSubmittedNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Notifications/Camper/IncompleteApplicationReminderNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$registration_closes_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/IncompleteApplicationReminderNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$camp\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/RejectionLetterNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/Camper/RejectionLetterNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Notifications/DocumentRequiresCompletionNotification.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Notifications/DocumentRequiresCompletionNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/NewConversationNotification.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Notifications/NewConversationNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Notifications/NewMessageNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Notifications/NewMessageNotification.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 2
+			path: app/Notifications/NewMessageNotification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Observers/AllergyObserver.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Services\\Medical\\SpecialNeedsRiskAssessmentService\:\:assessCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Observers/AllergyObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Observers/AssistiveDeviceObserver.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Services\\Medical\\SpecialNeedsRiskAssessmentService\:\:assessCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Observers/AssistiveDeviceObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Observers/BehavioralProfileObserver.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Services\\Medical\\SpecialNeedsRiskAssessmentService\:\:assessCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Observers/BehavioralProfileObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Observers/DiagnosisObserver.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Services\\Medical\\SpecialNeedsRiskAssessmentService\:\:assessCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Observers/DiagnosisObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Observers/FeedingPlanObserver.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Services\\Medical\\SpecialNeedsRiskAssessmentService\:\:assessCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Observers/FeedingPlanObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Observers/MedicalRecordObserver.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Services\\Medical\\SpecialNeedsRiskAssessmentService\:\:assessCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Observers/MedicalRecordObserver.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Policies/ActivityPermissionPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:canAccessCamperAsMedical\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/AllergyPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Policies/AllergyPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Policies/ApplicantDocumentPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:canAccessCamperAsMedical\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/AssistiveDevicePolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Policies/AssistiveDevicePolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:canAccessCamperAsMedical\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/BehavioralProfilePolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Policies/BehavioralProfilePolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:canAccessCamperAsMedical\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/DiagnosisPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Policies/DiagnosisPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Policies/DocumentPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:canAccessCamperAsMedical\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Policies/EmergencyContactPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Policies/EmergencyContactPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:canAccessCamperAsMedical\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/FeedingPlanPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Policies/FeedingPlanPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$formDefinition\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Policies/FormFieldPolicy.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isEditable\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: app/Policies/FormSectionPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Policies/MedicalFollowUpPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Policies/MedicalIncidentPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:canAccessCamperAsMedical\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/MedicalRecordPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/MedicalRecordPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Policies/MedicalRestrictionPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Policies/MedicalVisitPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:canAccessCamperAsMedical\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/MedicationPolicy.php
+
+		-
+			message: '#^Parameter \#1 \$camper of method App\\Models\\User\:\:ownsCamper\(\) expects App\\Models\\Camper, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Policies/MedicationPolicy.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasParticipant\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Policies/MessagePolicy.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 3
+			path: app/Services/Auth/MfaService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$capacity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Camper/ApplicationService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$enrolled_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Camper/ApplicationService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Camper/ApplicationService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isAtCapacity\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/Camper/ApplicationService.php
+
+		-
+			message: '#^Parameter \#1 \$recipient of method App\\Services\\SystemNotificationService\:\:applicationApproved\(\) expects App\\Models\\User, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/Camper/ApplicationService.php
+
+		-
+			message: '#^Parameter \#1 \$recipient of method App\\Services\\SystemNotificationService\:\:applicationRejected\(\) expects App\\Models\\User, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/Camper/ApplicationService.php
+
+		-
+			message: '#^Parameter \#1 \$recipient of method App\\Services\\SystemNotificationService\:\:applicationStatusChanged\(\) expects App\\Models\\User, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Services/Camper/ApplicationService.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:applications\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Services/DeadlineService.php
+
+		-
+			message: '#^Undefined variable\: \$applicant$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Services/DeadlineService.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Services/Document/DocumentEnforcementService.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Services/Document/DocumentEnforcementService.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<\(int\|string\),mixed\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 2
+			path: app/Services/Document/DocumentEnforcementService.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/Document/DocumentEnforcementService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$fields\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$form_definition_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$icon_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$short_title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:fields\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Method App\\Services\\Form\\FormBuilderService\:\:makeField\(\) should return App\\Models\\FormField but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Method App\\Services\\Form\\FormBuilderService\:\:makeSection\(\) should return App\\Models\\FormSection but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/Form/FormBuilderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$allergen\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$has_neurostimulator\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$has_seizures\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_seizure_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$reaction\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$seizure_description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$severity\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$treatment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Offset ''critical''\|''info''\|''warning'' on array\{critical\: 0, warning\: 1, info\: 2\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 2
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Parameter \#1 \$array of function usort contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function usort contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Services/Medical/MedicalAlertService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$aggression\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$developmental_delay\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$device_type\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$g_tube\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$has_neurostimulator\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$has_seizures\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$one_to_one_supervision\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$self_abuse\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$severity\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$severity_level\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$special_diet\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$wandering_risk\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Property App\\Models\\Camper\:\:\$supervision_level \(string\) does not accept App\\Enums\\SupervisionLevel\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Enums\\SupervisionLevel will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Services/Medical/SpecialNeedsRiskAssessmentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Services/MessageService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$recipient_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/MessageService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Services/MessageService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<TRelatedModel of Illuminate\\Database\\Eloquent\\Model\>\:\:forUser\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/MessageService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:notifyNow\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/MessageService.php
+
+		-
+			message: '#^Parameter \#1 \$conversation of method App\\Services\\InboxService\:\:getParticipantsExcept\(\) expects App\\Models\\Conversation, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/MessageService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$camp\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Services/System/LetterService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$end_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/System/LetterService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Services/System/LetterService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$start_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/System/LetterService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:notify\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Services/System/LetterService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$camp\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$end_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 9
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$start_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:requiresImmediateAttention\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Cannot access property \$age on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\Application\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 5
+			path: app/Services/System/ReportService.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: app/Services/SystemNotificationService.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Services/SystemNotificationService.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Http\\Request\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: app/Services/SystemNotificationService.php
